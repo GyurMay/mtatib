@@ -62,6 +62,12 @@ function getClosestStation(lat, lon){
         }
         }
 }
+
+var loaded = [];
 trainSelect.onChange = function(){
- loadSchedules(trainSelect.selectedOptions[0].value, 0);   
+    selected = trainSelect.selectedOptions[0].value;
+    if(loaded[selected] === undefined){
+        loadSchedules(trainSelect.selectedOptions[0].value, 0);
+        loaded[selected] = true;
+    }
 }
