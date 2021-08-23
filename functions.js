@@ -63,5 +63,5 @@ function getClosestStation(lat, lon){
         }
 }
 function selected(){
- loadSchedule(trainSelect.selectedOptions[0].value, 0);   
+ loadSchedule(trainSelect.selectedOptions[0].value.toString(), 0);   
 }
