@@ -64,7 +64,7 @@ function getClosestStation(lat, lon){
 }
 
 var loaded = [];
-trainSelect.onChange = function(){
+trainSelect.onchange = function(){
     selected = trainSelect.selectedOptions[0].value;
     if(loaded[selected] === undefined){
         loadSchedules(trainSelect.selectedOptions[0].value, 0);
