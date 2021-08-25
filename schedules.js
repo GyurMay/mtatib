@@ -19,7 +19,7 @@ let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops
 console.log(url);
 console.log(i);
   
-if(k > 40){
+if(k > lineJson.length){
   
   //set global const lat and lon
   if(navigator.geolocation){
