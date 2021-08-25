@@ -13,13 +13,13 @@ function mloadSchedules(line){
  fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => { loadSchedules(line, 0); });
 }
 function loadSchedules(line, k){
-
+  
 //getting and parsing subway train times
 let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${lineJson[k]["stopId"]}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
 console.log(url);
 console.log(i);
   
-if(k >= lineJson.length - 1){
+if(k >= (lineJson.length - 1)){ //stop If... and get closest stations to user
   
   //set global const lat and lon
   if(navigator.geolocation){
@@ -57,7 +57,7 @@ if(k >= lineJson.length - 1){
   }
   //end of global
   
-  return;
+  return; //exit recursion
 }
 k++;
 //12 -> Grand Ave, 05 -> Jamaica Center - Parsons/Archer
