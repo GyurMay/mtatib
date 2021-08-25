@@ -10,8 +10,7 @@ lang = document.location.search;
 locationPermission = false;
 function mloadSchedules(line){
  let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
- fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }) ;
- loadSchedules(line, 0);
+ fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => { loadSchedules(line, 0); });
 }
 function loadSchedules(line, k){
 
