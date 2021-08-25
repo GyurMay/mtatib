@@ -8,10 +8,15 @@
   **/
 lang = document.location.search;
 locationPermission = false;
+function mloadSchedules(line){
+ let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
+ fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }) ;
+ loadSchedules(line, 0);
+}
 function loadSchedules(line, k){
 
 //getting and parsing subway train times
-let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=MTASBWY:${line + (k.toString().padStart(2,'0')) }&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
+let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${lineJson[k]["stopId"]}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
 console.log(url);
 console.log(i);
   
