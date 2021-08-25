@@ -5,7 +5,7 @@
 
 function tibetanName(origName)
 {
-    if(has(lang, '?lang=eng')) return origName;
+    if(has(lang, 'lang=eng')) return origName;
     if(engToTib[origName] == null || engToTib[origName] == '')
         return origName;
     return engToTib[origName];
