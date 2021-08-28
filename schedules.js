@@ -8,73 +8,45 @@
   **/
 lang = document.location.search;
 locationPermission = false;
-function mloadSchedules(line){
+function mloadSchedules(line, k1){
  let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
- fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => { loadSchedules(line, 0); });
+ fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => { 
+    lat = locDb[lineJson[k1]["stopName"]];
+    lon = locDb[lineJson[k1]["stopName"]];
+    mStation = lineJson[k1]["stopId"];
+    var options = document.querySelector('.options');
+    optionsP = document.createElement('p');
+    optionsP.setAttribute('lat', lat);
+    optionsP.setAttribute('lon', lon);
+    optionsP.id = lineJson[k1]["stopName"];
+    optionsP.onclick = () => {
+        loadSchedules(mStation, 0);
+        schedulevisible(name+'-time');
+     };
+    let tName = tibetanName(name);
+    optionsP.innerHTML = tName;
+    options.appendChild(optionsP);
+     })
+  .then(() => { mloadSchedules(line, ++k1) });
 }
-function loadSchedules(line, k){
-  
+function loadSchedules(line){
+
 //getting and parsing subway train times
-let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${lineJson[k]["stopId"]}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
+let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${line}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
 console.log(url);
 console.log(i);
   
-if(k >= (lineJson.length - 1)){ //stop If... and get closest stations to user
-  
-  //set global const lat and lon
-  if(navigator.geolocation){
-  
-    if(locationPermission == false){
-    navigator.geolocation.getCurrentPosition((position) => {
-    console.log(position);
-    globalLat = position.coords.latitude;
-    globalLon = position.coords.longitude;
-    locationPermission = true;
-    getClosestStation(globalLat, globalLon);
-
-    lenny = options[0].childElementCount;
-    for(incre=0; incre<lenny; incre++){
-    options[0].appendChild(document.getElementById(d_arr[d_arr_cop[incre]]));
-    }
-    });
-    }else{
-    getClosestStation(globalLat, globalLon);
-
-    lenny = options[0].childElementCount;
-    for(incre=0; incre<lenny; incre++){
-    options[0].appendChild(document.getElementById(d_arr[d_arr_cop[incre]]));
-    }
-
-  }
-  }else{
-  alert("Permission denied - location, can't get nearby stations");
-  //getClosestStation(40.73659234516563, -73.87575414076787);
-  
-  lenny = options[0].childElementCount;
-  for(incre=0; incre<lenny; incre++){
-  options[0].appendChild(document.getElementById(d_arr[d_arr_cop[incre]]));
-  }
-  }
-  //end of global
-  
-  return; //exit recursion
-}
-k++;
 //12 -> Grand Ave, 05 -> Jamaica Center - Parsons/Archer
 // if(i > 37) return; //rm
 fetch(url).then((response) => {
 return response.json();
 })
-.then((jsonResponse) => {
+.then((jsonResponse) => { //print schedules with display:none;
 console.log(jsonResponse);
 a = jsonResponse;
 let jr = a[0];
-if(jsonResponse.length == 0)
-    loadSchedules(line, k);
-else{
 var name = jr['stop']['name'];
-var lat = jr['stop']['lat'];
-var lon = jr['stop']['lon'];
+if(document.getElementById(name+'-time') != null) document.getElementById(name+'-time').remove(); //remove old -time if exist
 stations = document.createElement('p'); //select divId(<p></p>) box
 stations.style.display = 'none';
 stationName = document.createElement('div');
@@ -82,24 +54,6 @@ stationName.innerHTML += '<b>'+name+'</b><br/><br/>';
 stations.append(stationName);
 stations.id = name+'-time';
 
-// homeexception = false;
-// homeexception = (jr['groups'][i]['headsign"] == 'Grand Av-Newtown') ? true : false;
-
-var options = document.querySelector('.options');
-optionsP = document.createElement('p');
-optionsP.setAttribute('lat', lat);
-optionsP.setAttribute('lon', lon);
-optionsP.id = name;
-optionsP.onclick = () => { 
-    schedulevisible(name+'-time');
- };
-let tName = tibetanName(name);
-optionsP.innerHTML = tName;
-// if(name == 'Grand Av-Newtown'){
-//     optionsP.style.backgroundColor = '#564178';
-//     optionsP.style.color = '#fff';
-// }
-options.appendChild(optionsP);
 table = document.createElement('table');
 var shortNames = [], headsigns = [], arrivalTimes = [];
 for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
@@ -122,7 +76,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
     document.body.appendChild(stations);
 }
   stations.appendChild(table);
-loadSchedules(line, k);
+  //
 }
 });
 }
