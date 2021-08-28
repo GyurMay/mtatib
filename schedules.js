@@ -77,10 +77,8 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
 }
   stations.appendChild(table);
   //
-}
 });
 }
-
 //load Using your geolocation
 function loadImmediatePath(){ 
 //for(i=0;i<options[0].childElementCount;i++){
