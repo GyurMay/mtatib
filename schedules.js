@@ -9,10 +9,11 @@
 lang = document.location.search;
 locationPermission = false;
 function mloadSchedules(line, k1){
+  if(k1 >= 1 && k>=lineJson.length) return;
  let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
  fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => { 
-    lat = locDb[lineJson[k1]["stopName"]];
-    lon = locDb[lineJson[k1]["stopName"]];
+    lat = locDb[lineJson[k1]["stopName"][0]];
+    lon = locDb[lineJson[k1]["stopName"][1]];
     mStation = lineJson[k1]["stopId"];
     var options = document.querySelector('.options');
     optionsP = document.createElement('p');
