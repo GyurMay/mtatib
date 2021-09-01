@@ -9,28 +9,32 @@
 lang = document.location.search;
 locationPermission = false;
 function mloadSchedules(line, k1){
-  if(k1 >= 1 && k>=lineJson.length) return;
+  if(k1 >= 1 && k1>=lineJson.length) return;
  let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
  fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => { 
-    lat = locDb[lineJson[k1]["stopName"][0]];
-    lon = locDb[lineJson[k1]["stopName"][1]];
+   for(k1;k1<lineJson.length;k1++){
+   console.log(lineJson[k1]["stopName"] + " found");
+    lat = locDb[lineJson[k1]["stopName"]][0];
+    lon = locDb[lineJson[k1]["stopName"]][1];
     mStation = lineJson[k1]["stopId"];
+    //set Stations
     var options = document.querySelector('.options');
     optionsP = document.createElement('p');
     optionsP.setAttribute('lat', lat);
     optionsP.setAttribute('lon', lon);
     optionsP.id = lineJson[k1]["stopName"];
     optionsP.onclick = () => {
-        loadSchedules(mStation, 0);
-        schedulevisible(name+'-time');
+      loadSchedules(mStation, 0);
+      schedulevisible(name+'-time');
      };
-    let tName = tibetanName(name);
-    optionsP.innerHTML = tName;
+    optionsP.innerHTML = tibetanName(optionsP.id);
     options.appendChild(optionsP);
-     })
-  .then(() => { mloadSchedules(line, ++k1) });
+   } 
+ })
+  //.then(() => { mloadSchedules(line, ++k1) })
+  ;
 }
-function loadSchedules(line){
+function loadSchedules(line, k){
 
 //getting and parsing subway train times
 let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${line}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
@@ -78,7 +82,8 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
 }
   stations.appendChild(table);
   //
-});
+})
+;
 }
 //load Using your geolocation
 function loadImmediatePath(){ 
@@ -124,3 +129,4 @@ immediatePath(lati, long, ++k);
 });
 }
 } //end of loadImmediatePath()
+mloadSchedules('R',0);
