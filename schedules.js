@@ -27,8 +27,8 @@ function mloadSchedules(line, k1){
     optionsP.id = name;  
     optionsP.innerHTML = tibetanName(optionsP.id);
     options.appendChild(optionsP);
-   } 
- })
+    } 
+   })
    .then(() => {
   //set global const lat and lon
   if(navigator.geolocation){
@@ -45,15 +45,21 @@ function mloadSchedules(line, k1){
     options[0].appendChild(document.getElementById(d_arr[d_arr_cop[incre]]));
     }
     });  
-  }else{
-  alert("Permission denied - location, can't get nearby stations");
-  //getClosestStation(40.73659234516563, -73.87575414076787);
-  }
+    }else{
+    //getClosestStation(40.73659234516563, -73.87575414076787);
+    getClosestStation(globalLat, globalLon);
+
+    lenny = options[0].childElementCount;
+    for(incre=0; incre<lenny; incre++){
+    options[0].appendChild(document.getElementById(d_arr[d_arr_cop[incre]]));
+    }
+    }
+  }else alert("Permission denied - location, can't get nearby stations");
   //end of global
-  
  })
   ;
-}
+}//end of mloadSchedules()
+
 function loadSchedules(line, name){	
 
 //getting and parsing subway train times
