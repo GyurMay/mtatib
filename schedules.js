@@ -29,6 +29,29 @@ function mloadSchedules(line, k1){
     options.appendChild(optionsP);
    } 
  })
+   .then(() => {
+  //set global const lat and lon
+  if(navigator.geolocation){
+    if(locationPermission == false){
+    navigator.geolocation.getCurrentPosition((position) => {
+    console.log(position);
+    globalLat = position.coords.latitude;
+    globalLon = position.coords.longitude;
+    locationPermission = true;
+    getClosestStation(globalLat, globalLon);
+
+    lenny = options[0].childElementCount;
+    for(incre=0; incre<lenny; incre++){
+    options[0].appendChild(document.getElementById(d_arr[d_arr_cop[incre]]));
+    }
+    });  
+  }else{
+  alert("Permission denied - location, can't get nearby stations");
+  //getClosestStation(40.73659234516563, -73.87575414076787);
+  }
+  //end of global
+  
+ })
   ;
 }
 function loadSchedules(line, name){	
