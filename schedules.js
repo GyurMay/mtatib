@@ -24,19 +24,12 @@ function mloadSchedules(line, k1){
     optionsP = document.createElement('p');
     optionsP.setAttribute('lat', lat);
     optionsP.setAttribute('lon', lon);
-    optionsP.id = name;
+    optionsP.id = name;  
     optionsP.innerHTML = tibetanName(optionsP.id);
     options.appendChild(optionsP);
    } 
  })
-  //.then(() => { mloadSchedules(line, ++k1) })
   ;
-}
-
-options[0].onclick  = (e) => {
-	if(loadSchedules(mStation[(e.target.id)], e.target.id) == true) ;	
-	// (loadSchedules(mStation[("MTASBWY:G09", "67 Av")]) && schedulevisible("67 Av-time"));	
-	// (loadSchedules(mStation[(e.target.id)], e.target.id) && schedulevisible(e.target.id+"-time"));
 }
 function loadSchedules(line, name){	
 
