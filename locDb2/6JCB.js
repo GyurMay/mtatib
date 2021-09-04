@@ -38,7 +38,7 @@ locDb["Sheepshead Bay"] = [40.585734,-73.954371];
 
 
 
-\\C
+//C
 locDb["168 St"] = [40.840719,-73.939561];
 locDb["163 St - Amsterdam Av"] = [40.835278,-73.939625];
 locDb["155 St"] = [40.830516,-73.941515];
@@ -81,7 +81,7 @@ locDb["Shepherd Av"] = [40.674129,-73.880751];
 
 
 
-\\J
+//J
 locDb["Jamaica Center - Parsons/Archer"] = [40.702147,-73.801109];
 locDb["Sutphin Blvd - Archer Av-JFK Airport"] = [40.700485,-73.807971];
 locDb["121 St"] = [40.700491,-73.828295];
@@ -114,7 +114,7 @@ locDb["Fulton St"] = [40.710372,-74.007584];
 
 
 
-\\6
+//6
 locDb["Pelham Bay Park"] = [40.852462,-73.828121];
 locDb["Buhre Av"] = [40.846795,-73.832405];
 locDb["Middletown Rd"] = [40.843935,-73.836386];

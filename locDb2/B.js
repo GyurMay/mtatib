@@ -1,5 +1,5 @@
 locDb = [];
-\\B  -  
+//B  -  
 locDb["Bedford Park Blvd"] = [40.874084,-73.887112];
 locDb["Kingsbridge Rd"] = [40.866978,-73.893509];
 locDb["Fordham Rd"] = [40.861295,-73.89775];
