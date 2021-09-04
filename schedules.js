@@ -6,6 +6,7 @@
   4. Design upgrade
   5. gmaps integration
   **/
+ mStation = [];
 lang = document.location.search;
 locationPermission = false;
 function mloadSchedules(line, k1){
@@ -13,20 +14,17 @@ function mloadSchedules(line, k1){
  let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
  fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => { 
    for(k1;k1<lineJson.length;k1++){
-   console.log(lineJson[k1]["stopName"] + " found");
+    name = lineJson[k1].stopName;
+    console.log(k1 + " : "+lineJson[k1]["stopName"] + " found");
     lat = locDb[lineJson[k1]["stopName"]][0];
     lon = locDb[lineJson[k1]["stopName"]][1];
-    mStation = lineJson[k1]["stopId"];
+    mStation[name] = lineJson[k1]["stopId"];
     //set Stations
     var options = document.querySelector('.options');
     optionsP = document.createElement('p');
     optionsP.setAttribute('lat', lat);
     optionsP.setAttribute('lon', lon);
-    optionsP.id = lineJson[k1]["stopName"];
-    optionsP.onclick = () => {
-      loadSchedules(mStation, 0);
-      schedulevisible(name+'-time');
-     };
+    optionsP.id = name;
     optionsP.innerHTML = tibetanName(optionsP.id);
     options.appendChild(optionsP);
    } 
@@ -34,7 +32,13 @@ function mloadSchedules(line, k1){
   //.then(() => { mloadSchedules(line, ++k1) })
   ;
 }
-function loadSchedules(line, k){
+
+options[0].onclick  = (e) => {
+	if(loadSchedules(mStation[(e.target.id)], e.target.id) == true) ;	
+	// (loadSchedules(mStation[("MTASBWY:G09", "67 Av")]) && schedulevisible("67 Av-time"));	
+	// (loadSchedules(mStation[(e.target.id)], e.target.id) && schedulevisible(e.target.id+"-time"));
+}
+function loadSchedules(line, name){	
 
 //getting and parsing subway train times
 let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${line}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
@@ -50,7 +54,6 @@ return response.json();
 console.log(jsonResponse);
 a = jsonResponse;
 let jr = a[0];
-var name = jr['stop']['name'];
 if(document.getElementById(name+'-time') != null) document.getElementById(name+'-time').remove(); //remove old -time if exist
 stations = document.createElement('p'); //select divId(<p></p>) box
 stations.style.display = 'none';
@@ -82,6 +85,9 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
 }
   stations.appendChild(table);
   //
+})
+.then((e) => {
+	schedulevisible(name+"-time");
 })
 ;
 }
@@ -129,4 +135,3 @@ immediatePath(lati, long, ++k);
 });
 }
 } //end of loadImmediatePath()
-mloadSchedules('R',0);
