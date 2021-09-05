@@ -107,7 +107,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
     document.body.appendChild(stations);
 }
   stations.appendChild(table);
-  //
+  stations.innerHTML += `<button id="go" style="/*! right: 0; */ /*! position: absolute; */position: relative;padding: 2em;font-size: 50%;top: 1em;left: 30%;background: teal;color: #fff;border: 5px solid white;border-radius: 19%;box-shadow: 4px 3px 0.5em black;">GO</button>`;
 })
 .then((e) => {
   schedulevisible(name+"-time");
@@ -145,7 +145,7 @@ for(i=0;i < itineraries.length;i++){
         innerData = timeFormatted + ' (' + itineraries[i]['legs'][j]['headsign'] + ') ' + itineraries[i]['legs'][j]['from']['name'] + '<br>' ;
         totalString += innerData;
     }
-    totalString += '<br/><br/><hr/>';
+    totalString += '<br/><br/><hr/>'; 
 }
 console.log(document.getElementById(el.id+"-time"));
 console.log("--"+totalString);
