@@ -112,6 +112,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
 .then((e) => {
   schedulevisible(name+"-time");
   go.onclick = () => {
+    go.style.display = "none";
     immediatePath(globalLat, globalLon, selectedStation);
     }
 })
