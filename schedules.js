@@ -15,7 +15,7 @@ function mloadSchedules(line, k1){
  fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => {
    for(k1;k1<lineJson.length;k1++){
     name = lineJson[k1].stopName;
-	if(locDb[lineJson[k1]["stopName"]] == undefined) continue;
+  if(locDb[lineJson[k1]["stopName"]] == undefined) continue;
     console.log(k1 + " : "+lineJson[k1]["stopName"] + " found");
     lat = locDb[lineJson[k1]["stopName"]][0];
     lon = locDb[lineJson[k1]["stopName"]][1];
@@ -61,7 +61,7 @@ function mloadSchedules(line, k1){
   ;
 }//end of mloadSchedules()
 
-function loadSchedules(line, name){	
+function loadSchedules(line, name){ 
 
 //getting and parsing subway train times
 let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${line}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
@@ -93,9 +93,9 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
     numberOfTrains = jr['groups'][i]['times'].length;
   
     for(j=0; j<numberOfTrains; j++){ //get arrival times rows
-  	  tr = document.createElement('tr');
-  	  table.appendChild(tr);
-  	  tr.innerHTML += (`<td><img src='https://new.mta.info/themes/custom/bootstrap_mta/images/icons/${shortNames[i]}.svg'></td>`);
+      tr = document.createElement('tr');
+      table.appendChild(tr);
+      tr.innerHTML += (`<td><img src='https://new.mta.info/themes/custom/bootstrap_mta/images/icons/${shortNames[i]}.svg'></td>`);
       tr.innerHTML += '<td>'+tibetanName(headsigns[i])+'</td>'; //Print HeadSigns (which side is it going)
       d = new Date(jr['groups'][i]['times'][j]['arrivalFmt']);
       h = (d.getHours() > 12) ?  d.getHours() - 12 : d.getHours();
@@ -110,23 +110,19 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
   //
 })
 .then((e) => {
-	schedulevisible(name+"-time");
+  schedulevisible(name+"-time");
 })
 ;
 }
+
 //load Using your geolocation
-function loadImmediatePath(){ 
-//for(i=0;i<options[0].childElementCount;i++){
-//  options[0].children[i].onclick = () => { loadImmediatePath(latLon[0], latLon[1], i); };
-//}
-immediatePath(globalLat, globalLon, 0);
-function immediatePath(lati, long, k){
+function immediatePath(lati, long, el){
 var totalString = '<hr/><br/>paths<br/>';
-if(k >= options[0].childElementCount) return;
 var fromLat = lati;
 var fromLon = long;
-let lat = options[0].children[k].getAttribute('lat');
-let lon = options[0].children[k].getAttribute('lon');
+let lat = el.getAttribute('lat');
+let lon = el.getAttribute('lon');
+console.log(lat);
 
 fetch(`https://otp-mta-prod.camsys-apps.com/otp/routers/default/plan?apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE&toPlace=${lat},${lon}&fromPlace=${fromLat},${fromLon}`).
 then((resp) => { return (resp.json()) }).then((jResp) => {
@@ -151,10 +147,8 @@ for(i=0;i < itineraries.length;i++){
     }
     totalString += '<br/><br/><hr/>';
 }
-console.log(document.getElementById(options[0].children[k].id+"-time"));
+console.log(document.getElementById(el.id+"-time"));
 console.log("--"+totalString);
-document.getElementById(options[0].children[k].id+"-time").innerHTML += totalString;
-immediatePath(lati, long, ++k);
+document.getElementById(el.id+"-time").innerHTML += totalString;
 });
 }
-} //end of loadImmediatePath()
