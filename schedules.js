@@ -111,7 +111,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
 })
 .then((e) => {
   schedulevisible(name+"-time");
-  go.onclick = () =&gt; {
+  go.onclick = () => {
     immediatePath(globalLat, globalLon, selectedStation);
     }
 })
