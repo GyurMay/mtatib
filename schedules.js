@@ -8,7 +8,6 @@
   **/
 
 mStation = [];
-load_icon = document.getElementById("load_icon");
 lang = document.location.search;
 locationPermission = false;
 function mloadSchedules(line, k1){
@@ -68,7 +67,7 @@ function loadSchedules(line, name){
 //getting and parsing subway train times
 let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${line}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
 console.log(url);
-load_icon.style.display = "block";
+document.getElementById("load_icon").style.display = "block";
 console.log(i);
 //12 -> Grand Ave, 05 -> Jamaica Center - Parsons/Archer
 // if(i > 37) return; //rm
@@ -112,7 +111,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
   stations.innerHTML += `<button id="go" style="/*! right: 0; */ /*! position: absolute; */position: relative;padding: 2em;font-size: 50%;top: 1em;left: 30%;background: teal;color: #fff;border: 5px solid white;border-radius: 19%;box-shadow: 4px 3px 0.5em black;">GO</button>`;
 })
 .then((e) => {
-  load_icon.style.display = "none";
+  document.getElementById("load_icon").style.display = "none";
   schedulevisible(name+"-time");
   go.onclick = () => {
     go.style.display = "none";
