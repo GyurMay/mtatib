@@ -86,15 +86,15 @@ stationName.innerHTML += '<b>'+name+'</b><br/><br/>';
 stations.append(stationName);
 stations.id = name+'-time';
 
-table = document.createElement('table');
+let table = document.createElement('table');
+  table.id = "times";
 var shortNames = [], headsigns = [], arrivalTimes = [];
 for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
     shortNames[i] = jr['groups'][i]['route']['shortName'];
     headsigns[i] = jr['groups'][i]['headsign'];
     numberOfTrains = jr['groups'][i]['times'].length;
-  
     for(j=0; j<numberOfTrains; j++){ //get arrival times rows
-      tr = document.createElement('tr');
+      let tr = document.createElement('tr');
       table.appendChild(tr);
       tr.innerHTML += (`<td><img src='https://new.mta.info/themes/custom/bootstrap_mta/images/icons/${shortNames[i]}.svg'></td>`);
       tr.innerHTML += '<td>'+tibetanName(headsigns[i])+'</td>'; //Print HeadSigns (which side is it going)
@@ -114,7 +114,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
   document.getElementById("load_icon").style.display = "none";
   schedulevisible(name+"-time");
   go.onclick = () => {
-    go.style.display = "none";
+    go.remove();
     immediatePath(globalLat, globalLon, selectedStation);
     }
 })
@@ -129,12 +129,13 @@ var fromLon = long;
 let lat = el.getAttribute('lat');
 let lon = el.getAttribute('lon');
 console.log(lat);
-
 fetch(`https://otp-mta-prod.camsys-apps.com/otp/routers/default/plan?apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE&toPlace=${lat},${lon}&fromPlace=${fromLat},${fromLon}`).
 then((resp) => { return (resp.json()) }).then((jResp) => {
 a = jResp;
 console.log(a);
 itineraries = a['plan']['itineraries'];
+let table = document.createElement('table');
+  table.innerHTML = `Leave-Now` + table.innerHTML;
 for(i=0;i < itineraries.length;i++){
     for(j=0;j < itineraries[i]['legs'].length;j++){
         if(itineraries[i]['legs'][j]['mode'] == 'WALK') continue;
@@ -143,18 +144,21 @@ for(i=0;i < itineraries.length;i++){
         }else{
           logo = `<img width=100 height=100 src='https://new.mta.info/themes/custom/bootstrap_mta/images/icons/${itineraries[i]['legs'][j]['route']}.svg'></img>`;
         }
-        totalString += logo;
+        let tr = document.createElement('tr');
+        table.appendChild(tr);
+        innerData += logo;
         arrivalTime = new Date(itineraries[i]['legs'][j]['startTimeFmt']);
         amPm = (arrivalTime.getHours() > 12) ? 'PM' : 'AM';
         hours = (amPm == 'PM') ? arrivalTime.getHours() - 12 : arrivalTime.getHours();
         timeFormatted = (hours +':'+ arrivalTime.getMinutes() + amPm );
-        innerData = timeFormatted + ' (' + itineraries[i]['legs'][j]['headsign'] + ') ' + itineraries[i]['legs'][j]['from']['name'] + '<br>' ;
-        totalString += innerData;
+        station = `<td style="display:none"> (` + itineraries[i]['legs'][j]['headsign'] + ') ' + `</td>`;
+        innerData = `<td>${logo}</td><td>` + itineraries[i]['legs'][j]['from']['name'] + '</td>'+station+`<td style="font-size:60%">`
+                    + timeFormatted + '</td>';
+        tr.innerHTML += innerData;
     }
-    totalString += '<br/><br/><hr/>'; 
 }
 console.log(document.getElementById(el.id+"-time"));
 console.log("--"+totalString);
-document.getElementById(el.id+"-time").innerHTML += totalString;
+document.getElementById(el.id+"-time").append(table);
 });
 }
