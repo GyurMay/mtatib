@@ -135,6 +135,7 @@ a = jResp;
 console.log(a);
 itineraries = a['plan']['itineraries'];
 let table = document.createElement('table');
+document.querySelectorAll("table")[1].innerHTML = '<h3>Leave-Now</h3><br/><br/>'+document.querySelectorAll("table")[1].innerHTML;
 for(i=0;i < itineraries.length;i++){
     for(j=0;j < itineraries[i]['legs'].length;j++){
         if(itineraries[i]['legs'][j]['mode'] == 'WALK') continue;
