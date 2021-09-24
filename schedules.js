@@ -103,7 +103,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
       if(h == 0) h = 12;
       amPm = (d.getHours() > 12) ? 'PM' : 'AM';
       arrivalTimes[j] =  h+':'+d.getMinutes()+amPm;
-      tr.innerHTML += (`<td style='font-size:60%;'>${d.getMinutes() - (new Date()).getMinutes()} min, ${arrivalTimes[j]}</td>`);
+      tr.innerHTML += (`<td style='font-size:60%;'>${d.getMinutes() - (new Date()).getMinutes()} min</td>`);
     }
     document.body.appendChild(stations);
 }
