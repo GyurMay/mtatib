@@ -26,8 +26,11 @@ function mloadSchedules(line, k1){
     optionsP = document.createElement('p');
     optionsP.setAttribute('lat', lat);
     optionsP.setAttribute('lon', lon);
-    optionsP.id = name;  
+    optionsP.id = name;
     optionsP.innerHTML = tibetanName(optionsP.id);
+    randomBlueLevel = Math.random() * 255;
+    optionsP.style.backgroundColor = `rgba(120,120,${randomBlueLevel},0.7)`;
+    randomBlueLevel = randomBlueLevel % 150 + 50; 
     options.appendChild(optionsP);
     } 
    })
