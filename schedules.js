@@ -11,7 +11,8 @@ mStation = [];
 lang = document.location.search;
 locationPermission = false;
 locDb = [];
-function mloadSchedules(line, k1){
+
+function loadMainPage(line, k1){
   if(k1 >= 1 && k1>=lineJson.length) return;
  let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
  fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => {
@@ -45,7 +46,6 @@ function mloadSchedules(line, k1){
     globalLon = position.coords.longitude;
     locationPermission = true;
     getClosestStation(globalLat, globalLon);
-
     lenny = options[0].childElementCount;
     for(incre=0; incre<lenny; incre++){
     options[0].appendChild(document.getElementById(d_arr[d_arr_cop[incre]]));
@@ -54,7 +54,6 @@ function mloadSchedules(line, k1){
     }else{
     //getClosestStation(40.73659234516563, -73.87575414076787);
     getClosestStation(globalLat, globalLon);
-
     lenny = options[0].childElementCount;
     for(incre=0; incre<lenny; incre++){
     options[0].appendChild(document.getElementById(d_arr[d_arr_cop[incre]]));
@@ -64,10 +63,9 @@ function mloadSchedules(line, k1){
   //end of global
  })
   ;
-}//end of mloadSchedules()
+}//end of loadMainPage()
 
-
-function loadSchedules(line, name){ 
+function loadSchedulePage(line, name){
 //getting and parsing subway train times
 let url = `https://otp-mta-prod.camsys-apps.com/otp/routers/default/nearby?stops=${line}&apikey=Z276E3rCeTzOQEoBPPN4JCEc6GfvdnYE`;
 console.log(url);
@@ -89,7 +87,6 @@ stationName = document.createElement('div');
 stationName.innerHTML += '<b>'+name+'</b><br/><br/>';
 stations.append(stationName);
 stations.id = name+'-time';
-
 let table = document.createElement('table');
   table.id = "times";
 var shortNames = [], headsigns = [], arrivalTimes = [];
@@ -113,7 +110,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
     document.body.appendChild(stations);
 }
   stations.appendChild(table);
-  stations.innerHTML += `<button id="go" style="/*! right: 0; */ /*! position: absolute; */position: relative;padding: 2em;font-size: 50%;top: 1em;left: 30%;background: teal;color: #fff;border: 5px solid white;border-radius: 19%;box-shadow: 4px 3px 0.5em black;">GO</button>`;
+  stations.innerHTML += `<button id="go" style="position: relative;padding: 2em;font-size: 50%;top: 1em;left: 30%;background: teal;color: #fff;border: 5px solid white;border-radius: 19%;box-shadow: 4px 3px 0.5em black;">GO</button>`;
 })
 .then((e) => {
   document.getElementById("load_icon").style.display = "none";
