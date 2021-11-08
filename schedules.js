@@ -10,6 +10,7 @@
 mStation = [];
 lang = document.location.search;
 locationPermission = false;
+locDb = [];
 function mloadSchedules(line, k1){
   if(k1 >= 1 && k1>=lineJson.length) return;
  let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
