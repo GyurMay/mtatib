@@ -23,7 +23,7 @@ function filter(){
     console.log('filter clicked');
     let visibleStation = document.getElementsByClassName('options')[0].childElementCount;
     let search = searchField.value;
-    for(i=0;i<visibleStation;i++){ //goes through options class to hide all the options
+    for(i=0;i<visibleStation;i++){ //goes through options class to hide all the options/visible stations
     if(document.getElementsByClassName('options')[0].children[i].id.toLowerCase().split(search.toLowerCase()).length >= 2){
         match = document.getElementsByClassName('options')[0].children[i].id;
         console.log('Results found: ' + match);
@@ -73,9 +73,16 @@ trainSelect.onchange = function(){
 }
 
 function setHome(){
-    homeStation = searchStation();
+    alert("search and select a home station");
+//     homeStation = searchStation();
     //document.cookie = `homestation=${homeStation}; expires=Wed, 18 Dec 2030 12:00:00 UTC`;
 }
-function searchStation(){
-    
+// function searchStation(){
+//     let div = document.createElement("div");
+//     let hsf = document.createElement("input"); //homeSearchField
+//     hsf.type = "text";
+//     hsf.onkeydown = () => {
+//         let search = hsf.value;
+        
+//     }
 }
