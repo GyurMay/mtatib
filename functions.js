@@ -71,3 +71,11 @@ trainSelect.onchange = function(){
         loaded[selected] = true;
     }
 }
+
+function setHome(){
+    homeStation = searchStation();
+    //document.cookie = `homestation=${homeStation}; expires=Wed, 18 Dec 2030 12:00:00 UTC`;
+}
+function searchStation(){
+    
+}
