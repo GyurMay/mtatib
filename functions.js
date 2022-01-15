@@ -74,8 +74,20 @@ trainSelect.onchange = function(){
 
 function setHome(){
     alert("search and select a home station");
-//     homeStation = searchStation();
-    //document.cookie = `homestation=${homeStation}; expires=Wed, 18 Dec 2030 12:00:00 UTC`;
+    homeStation = shs();
+    //homeStation = searchStation();
+    document.cookie = `homestation=${homeStation}; expires=Wed, 18 Dec 2030 12:00:00 UTC`;
+    alert(document.cookie);
+}
+function shs(){ //select home station
+    e = document.getElementsByClassName("options")[0].children;
+    for(i=0;i<e.length;i++){
+        a[i] = e[i].onclick;
+        e[i].onclick = () => {
+            e[i].onclick = a[i];
+            return e[i].textContent;
+        };
+    }
 }
 // function searchStation(){
 //     let div = document.createElement("div");
