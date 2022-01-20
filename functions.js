@@ -72,13 +72,16 @@ trainSelect.onchange = function(){
     }
 }
 
-setHome.onclick = () => {
+document.getElementById("setHome").onclick = () => {
     alert("search and select a home station");
-    
-    document.querySelector('p').style.backgroundColor = 'black'; document.querySelector('p').style.color = 'white';
+    document.querySelectorAll('p').forEach((a) => { a.style.backgroundColor = 'black'; a.style.color = 'white'; });
     document.onclick = (e) => {
-    document.cookie = `homestation=${e.target.id}; samesite=none; secure; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
-    alert(e.target.id + ' is set as your home station.');
+        if(e.target.tagName == 'P'){
+        document.cookie = `homestation=${e.target.id}; samesite=none; secure; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
+        alert(e.target.id + ' is set as your home station.');
+        document.location.reload();
+        }
+    }
     }
 }
 
