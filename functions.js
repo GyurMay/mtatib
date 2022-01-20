@@ -74,9 +74,9 @@ trainSelect.onchange = function(){
 
 function setHome(){
     alert("search and select a home station");
-    homeStation = shs();
+    var homeStation = shs();
     //homeStation = searchStation();
-    document.cookie = `homestation=${homeStation}; expires=Wed, 18 Dec 2030 12:00:00 UTC`;
+    document.cookie = `homestation=${homeStation}; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
     alert(document.cookie);
 }
 function shs(){ //select home station
@@ -85,7 +85,7 @@ function shs(){ //select home station
         a[i] = e[i].onclick;
         e[i].onclick = () => {
             e[i].onclick = a[i];
-            return e[i].textContent;
+            console.log(e[i].textContent);
         };
     }
 }
@@ -98,3 +98,14 @@ function shs(){ //select home station
         
 //     }
 // }
+
+menuButton.style.border = 'none';
+menuButton.style.scale = '1.2';
+
+function showMenu(){
+    menu.style.display = (menu.style.display == 'none') ? 'inline-block' : 'none';
+}
+
+
+
+
