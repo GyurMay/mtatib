@@ -104,7 +104,12 @@ function showMenu(){
         svg[2].setAttribute('transform','rotate(0)');
     }
 }
-
-
+function getHome(){
+ return document.cookie.split("homestation=")[1];
+}
+let homeStation = getHome();
+let homeStationEl = document.getElementById(homestation).cloneNode();
+homeStationEl.textContent = "Home Station - "+homeStation;
+document.querySelector('.options').prepend(homeStationEl);
 
 
