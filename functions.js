@@ -106,9 +106,10 @@ function showMenu(){
 function getHome(){
  return document.cookie.split("homestation=")[1];
 }
+function homeStaPrepend(){
 let homeStation = getHome();
 let homeStationEl = document.getElementById(homeStation).cloneNode();
 homeStationEl.textContent = "Home Station - "+homeStation;
 document.querySelector('.options').prepend(homeStationEl);
-
+}
 
