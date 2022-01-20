@@ -72,9 +72,8 @@ trainSelect.onchange = function(){
     }
 }
 
-window.onload = () => {
-document.getElementById("setHome").onclick = () => {
-    alert("search and select a home station");
+function setHome(){
+    alert("search or select a home station");
     document.querySelectorAll('p').forEach((a) => { a.style.backgroundColor = 'black'; a.style.color = 'white'; });
     document.onclick = (e) => {
         if(e.target.tagName == 'P'){
@@ -83,8 +82,7 @@ document.getElementById("setHome").onclick = () => {
         document.location.reload();
         }
     }
-  }   
-};
+}
 
 menuButton.style.border = 'none';
 menuButton.style.scale = '1.2';
