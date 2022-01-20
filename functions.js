@@ -103,7 +103,19 @@ menuButton.style.border = 'none';
 menuButton.style.scale = '1.2';
 
 function showMenu(){
-    menu.style.display = (menu.style.display == 'none') ? 'inline-block' : 'none';
+    hidden = (menu.style.display == 'none') ? true : false;
+    svg = document.querySelectorAll('svg')[0].children;
+    if(hidden){
+        menu.style.display = 'inline-block';
+        svg[0].setAttribute('transform',"rotate(45, 15, 20)");
+        svg[1].style.display = 'none';
+        svg[2].setAttribute('transform','rotate(-45, 10, 50)');
+    }else{
+        menu.style.display = 'none';
+        svg[0].setAttribute('transform',"rotate{0)");
+        svg[1].style.display = 'block';
+        svg[2].setAttribute('transform','rotate(0)');
+    }
 }
 
 
