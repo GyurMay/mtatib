@@ -82,8 +82,7 @@ document.getElementById("setHome").onclick = () => {
         document.location.reload();
         }
     }
-    }
-}
+  }
 
 menuButton.style.border = 'none';
 menuButton.style.scale = '1.2';
