@@ -72,35 +72,22 @@ trainSelect.onchange = function(){
     }
 }
 
-function setHome(){
+setHome.onclick = () => {
     alert("search and select a home station");
-    var homeStation = shs();
-    //homeStation = searchStation();
-    document.cookie = `homestation=${homeStation}; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
-    alert(document.cookie);
-}
-function shs(){ //select home station
-    e = document.getElementsByClassName("options")[0].children;
-    for(i=0;i<e.length;i++){
-        a[i] = e[i].onclick;
-        e[i].onclick = () => {
-            e[i].onclick = a[i];
-            console.log(e[i].textContent);
-        };
+    let stations = document.getElementsByClassName("options")[0].children;
+    let homeStation;
+    for(i=0;i<stations.length;i++){
+        stations[i].style.backgroundColor = 'black'; stations[i].style.color = 'white';
+        stations[i].onclick = (e) => {
+        homeStation = e.target.id;
+        document.cookie = `homestation=${homeStation}; samesite=none; secure; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
+        }
     }
 }
-// function searchStation(){
-//     let div = document.createElement("div");
-//     let hsf = document.createElement("input"); //homeSearchField
-//     hsf.type = "text";
-//     hsf.onkeydown = () => {
-//         let search = hsf.value;
-        
-//     }
-// }
 
 menuButton.style.border = 'none';
 menuButton.style.scale = '1.2';
+menuButton.style.marginTop = '1em';
 
 function showMenu(){
     hidden = (menu.style.display == 'none') ? true : false;
