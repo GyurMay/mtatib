@@ -110,6 +110,7 @@ function getHome(){
  return document.cookie.split("homestation=")[1];
 }
 function homeStaPrepend(){
+if(getHome() === undefined) return false;
 try{
 homeStation = getHome();
 document.querySelector('.options').innerHTML = homeStation + document.querySelector('.options').innerHTML;
