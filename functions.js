@@ -77,7 +77,9 @@ function setHome(){
     document.querySelectorAll('p').forEach((a) => { a.style.backgroundColor = 'black'; a.style.color = 'white'; });
     document.onclick = (e) => {
         if(e.target.tagName == 'P'){
-        document.cookie = `homestation=${e.target.id}; samesite=none; secure; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
+        homeStationEl = e.target;
+        homeStationEl.textContent = 'Home Station - ' + e.target.id;
+        document.cookie = `homestation=${homeStationEl.outerHTML}; samesite=none; secure; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
         alert(e.target.id + ' is set as your home station.');
         document.location.reload();
         }
@@ -109,9 +111,7 @@ function getHome(){
 function homeStaPrepend(){
 try{
 homeStation = getHome();
-homeStationEl = document.getElementById(homeStation).cloneNode();
-homeStationEl.textContent = "Home Station - "+homeStation;
-document.querySelector('.options').prepend(homeStationEl);
+document.querySelector('.options').prepend(homeStation);
 }catch{
     return false;
 }
