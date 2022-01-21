@@ -79,7 +79,8 @@ function setHome(){
         if(e.target.tagName == 'P'){
         homeStationEl = e.target;
         homeStationEl.textContent = 'Home Station - ' + e.target.id;
-        document.cookie = `homestation=${homeStationEl.outerHTML}; samesite=none; secure; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
+        h = homeStationEl.outerHTML.split("background-color: black; color: white;").join('');
+        document.cookie = `homestation=${h}; samesite=none; secure; expires=Wed, 18 Dec 2030 00:00:00 UTC`;
         alert(e.target.id + ' is set as your home station.');
         document.location.reload();
         }
