@@ -111,7 +111,8 @@ function getHome(){
 function homeStaPrepend(){
 try{
 homeStation = getHome();
-document.querySelector('.options').prepend(homeStation);
+document.querySelector('.options') = homeStation + document.querySelector('.options');
+
 }catch{
     return false;
 }
