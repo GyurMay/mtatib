@@ -87,30 +87,11 @@ stationName = document.createElement('div');
 stationName.innerHTML += '<b>'+name+'</b><br/><br/>';
 stations.append(stationName);
 stations.id = name+'-time';
-let table = document.createElement('table');
-  table.id = "times";
-var shortNames = [], headsigns = [], arrivalTimes = [];
-for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
-    shortNames[i] = jr['groups'][i]['route']['shortName'];
-    headsigns[i] = jr['groups'][i]['headsign'];
-    numberOfTrains = jr['groups'][i]['times'].length;
-    for(j=0; j<numberOfTrains; j++){ //get arrival times rows
-      let tr = document.createElement('tr');
-      table.appendChild(tr);
-      tr.innerHTML += (`<td><img src='https://new.mta.info/themes/custom/bootstrap_mta/images/icons/${shortNames[i]}.svg'></td>`);
-      tr.innerHTML += '<td>'+tibetanName(headsigns[i])+'</td>'; //Print HeadSigns (which side is it going)
-      d = new Date(jr['groups'][i]['times'][j]['arrivalFmt']);
-      h = (d.getHours() > 12) ?  d.getHours() - 12 : d.getHours();
-      if(h == 0) h = 12;
-      amPm = (d.getHours() > 12) ? 'PM' : 'AM';
-      arrivalTimes[j] =  h+':'+d.getMinutes()+amPm;
-      console.log("(new Date()).getHours(): " + (new Date()).getHours() + " > d.getHours(): " + d.getHours());
-      tr.innerHTML += (`<td style='font-size:60%;'>${((new Date()).getHours() == (d.getHours())) ? (d.getMinutes() - (new Date()).getMinutes()) : ( (60 - (new Date()).getMinutes()) + d.getMinutes() ) } min</td>`);
-    }
-    document.body.appendChild(stations);
+stations.innerHTML += `<button id="go" style="position: relative;padding: 2em;font-size: 50%;top: 1em;left: 30%;background: teal;color: #fff;border: 5px solid white;border-radius: 19%;box-shadow: 4px 3px 0.5em black;">Go Here</button>`;
+showTrainTimes();
+document.body.appendChild(stations);
 }
   stations.appendChild(table);
-  stations.innerHTML += `<button id="go" style="position: relative;padding: 2em;font-size: 50%;top: 1em;left: 30%;background: teal;color: #fff;border: 5px solid white;border-radius: 19%;box-shadow: 4px 3px 0.5em black;">GO</button>`;
 })
 .then((e) => {
   document.getElementById("load_icon").style.display = "none";
@@ -163,4 +144,27 @@ console.log(document.getElementById(el.id+"-time"));
 console.log("--"+totalString);
 document.getElementById(el.id+"-time").append(table);
 });
+}
+
+function showTrainTimes(){
+let table = document.createElement('table');
+table.id = "times";
+var shortNames = [], headsigns = [], arrivalTimes = [];
+for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
+    shortNames[i] = jr['groups'][i]['route']['shortName'];
+    headsigns[i] = jr['groups'][i]['headsign'];
+    numberOfTrains = jr['groups'][i]['times'].length;
+    for(j=0; j<numberOfTrains; j++){ //get arrival times rows
+      let tr = document.createElement('tr');
+      table.appendChild(tr);
+      tr.innerHTML += (`<td><img src='https://new.mta.info/themes/custom/bootstrap_mta/images/icons/${shortNames[i]}.svg'></td>`);
+      tr.innerHTML += '<td>'+tibetanName(headsigns[i])+'</td>'; //Print HeadSigns (which side is it going)
+      d = new Date(jr['groups'][i]['times'][j]['arrivalFmt']);
+      h = (d.getHours() > 12) ?  d.getHours() - 12 : d.getHours();
+      if(h == 0) h = 12;
+      amPm = (d.getHours() > 12) ? 'PM' : 'AM';
+      arrivalTimes[j] =  h+':'+d.getMinutes()+amPm;
+      console.log("(new Date()).getHours(): " + (new Date()).getHours() + " > d.getHours(): " + d.getHours());
+      tr.innerHTML += (`<td style='font-size:60%;'>${((new Date()).getHours() == (d.getHours())) ? (d.getMinutes() - (new Date()).getMinutes()) : ( (60 - (new Date()).getMinutes()) + d.getMinutes() ) } min</td>`);
+    }
 }
