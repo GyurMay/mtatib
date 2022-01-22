@@ -1,8 +1,13 @@
-/**
- * Remaining updates/Features
- * 1. GMaps Integration
- * 2. Design Upgrade
- * **/mStation = [];
+/***
+  FEATURES TO MAKE
+  1. Remove duplicates after loading twice or, restrict loading twice
+  2. Train load to Select button with options inside
+  3. Path feature (loadImmediatePath)
+  4. Design upgrade
+  5. gmaps integration
+  **/
+
+mStation = [];
 lang = document.location.search;
 locationPermission = false;
 locDb = [];
@@ -82,29 +87,8 @@ stationName = document.createElement('div');
 stationName.innerHTML += '<b>'+name+'</b><br/><br/>';
 stations.append(stationName);
 stations.id = name+'-time';
-stations.innerHTML += `<button id="go" style="position: relative;padding: 2em;font-size: 50%;left: 27%;background: teal;color: #fff; bottom: 1em;border: 5px solid white;border-radius: 7%;box-shadow: 4px 3px 0.5em black;">Go Here</button>`;
-//showTrainTimes();
-  let table = document.createElement('table');
-table.id = "times";
-var shortNames = [], headsigns = [], arrivalTimes = [];
-for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
-    shortNames[i] = jr['groups'][i]['route']['shortName'];
-    headsigns[i] = jr['groups'][i]['headsign'];
-    numberOfTrains = jr['groups'][i]['times'].length;
-    for(j=0; j<numberOfTrains; j++){ //get arrival times rows
-      let tr = document.createElement('tr');
-      table.appendChild(tr);
-      tr.innerHTML += (`<td><img src='https://new.mta.info/themes/custom/bootstrap_mta/images/icons/${shortNames[i]}.svg'></td>`);
-      tr.innerHTML += '<td>'+tibetanName(headsigns[i])+'</td>'; //Print HeadSigns (which side is it going)
-      d = new Date(jr['groups'][i]['times'][j]['arrivalFmt']);
-      h = (d.getHours() > 12) ?  d.getHours() - 12 : d.getHours();
-      if(h == 0) h = 12;
-      amPm = (d.getHours() > 12) ? 'PM' : 'AM';
-      arrivalTimes[j] =  h+':'+d.getMinutes()+amPm;
-      console.log("(new Date()).getHours(): " + (new Date()).getHours() + " > d.getHours(): " + d.getHours());
-      tr.innerHTML += (`<td style='font-size:60%;'>${((new Date()).getHours() == (d.getHours())) ? (d.getMinutes() - (new Date()).getMinutes()) : ( (60 - (new Date()).getMinutes()) + d.getMinutes() ) } min</td>`);
-    }
-
+stations.innerHTML += `<button id="go" style="position: relative;padding: 2em;font-size: 50%;top: 1em;left: 30%;background: teal;color: #fff;border: 5px solid white;border-radius: 19%;box-shadow: 4px 3px 0.5em black;">Go Here</button>`;
+showTrainTimes();
 document.body.appendChild(stations);
 }
   stations.appendChild(table);
@@ -162,7 +146,7 @@ document.getElementById(el.id+"-time").append(table);
 });
 }
 
-function showTrainTimes(){ //create a table that has all rows of train arrival, bus arrival at the station nearest to the user
+function showTrainTimes(){
 let table = document.createElement('table');
 table.id = "times";
 var shortNames = [], headsigns = [], arrivalTimes = [];
@@ -183,8 +167,4 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
       console.log("(new Date()).getHours(): " + (new Date()).getHours() + " > d.getHours(): " + d.getHours());
       tr.innerHTML += (`<td style='font-size:60%;'>${((new Date()).getHours() == (d.getHours())) ? (d.getMinutes() - (new Date()).getMinutes()) : ( (60 - (new Date()).getMinutes()) + d.getMinutes() ) } min</td>`);
     }
-
-document.body.appendChild(stations);
-}
-  stations.appendChild(table);
 }
