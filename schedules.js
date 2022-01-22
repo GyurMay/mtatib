@@ -1,6 +1,7 @@
 /**
  * Remaining updates/Features
  * 1. GMaps Integration
+ * 2. Design Upgrade
  * **/
 mStation = [];
 lang = document.location.search;
