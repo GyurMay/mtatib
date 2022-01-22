@@ -2,8 +2,7 @@
  * Remaining updates/Features
  * 1. GMaps Integration
  * 2. Design Upgrade
- * **/
-mStation = [];
+ * **/mStation = [];
 lang = document.location.search;
 locationPermission = false;
 locDb = [];
@@ -184,6 +183,7 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
       console.log("(new Date()).getHours(): " + (new Date()).getHours() + " > d.getHours(): " + d.getHours());
       tr.innerHTML += (`<td style='font-size:60%;'>${((new Date()).getHours() == (d.getHours())) ? (d.getMinutes() - (new Date()).getMinutes()) : ( (60 - (new Date()).getMinutes()) + d.getMinutes() ) } min</td>`);
     }
+
 document.body.appendChild(stations);
 }
   stations.appendChild(table);
