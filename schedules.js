@@ -160,7 +160,7 @@ for(i=0;i < itineraries.length;i++){
 }
 console.log(document.getElementById(el.id+"-time"));
 console.log("--"+totalString);
-document.getElementById(el.id+"-time").prepend(table);
+document.getElementById(el.id+"-time").innerHTML = document.getElementById(el.id+"-time").innerHTML + (table.innerHTML);
 });
 }
 
