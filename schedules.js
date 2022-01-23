@@ -3,6 +3,7 @@
  * 1. GMaps Integration
  * 2. Design Upgrade
  * **/
+
 mStation = [];
 lang = document.location.search;
 locationPermission = false;
@@ -85,7 +86,7 @@ stations.append(stationName);
 stations.id = name+'-time';
 stations.innerHTML += `<button id="go" style="position: relative;padding: 2em;font-size: 50%;left: 27%;background: teal;color: #fff; bottom: 1em;border: 5px solid white;border-radius: 7%;box-shadow: 4px 3px 0.5em black;">Go Here</button>`;
 //showTrainTimes();
-  let table = document.createElement('table');
+let table = document.createElement('table');
 table.id = "times";
 var shortNames = [], headsigns = [], arrivalTimes = [];
 for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
@@ -159,7 +160,7 @@ for(i=0;i < itineraries.length;i++){
 }
 console.log(document.getElementById(el.id+"-time"));
 console.log("--"+totalString);
-document.getElementById(el.id+"-time").append(table);
+document.getElementById(el.id+"-time").prepend(table);
 });
 }
 
