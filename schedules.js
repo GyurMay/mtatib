@@ -84,7 +84,7 @@ stationName = document.createElement('div');
 stationName.innerHTML += '<b>'+name+'</b><br/><br/>';
 stations.append(stationName);
 stations.id = name+'-time';
-if(name.toLowerCase().includes("home station")){
+if(getHome().includes(name)){
   console.log(name+" clicked");
   immediatePath(globalLat, globalLon, selectedStation);
   return;
