@@ -84,6 +84,10 @@ stationName = document.createElement('div');
 stationName.innerHTML += '<b>'+name+'</b><br/><br/>';
 stations.append(stationName);
 stations.id = name+'-time';
+if(name.toLowerCase().includes("home station")){
+  immediatePath(globalLat, globalLon, selectedStation);
+  return;
+}
 stations.innerHTML += `<button id="go" style="position: relative;padding: 2em;font-size: 50%;left: 27%;background: teal;color: #fff; bottom: 1em;border: 5px solid white;border-radius: 7%;box-shadow: 4px 3px 0.5em black;">Go Here</button>`;
 //showTrainTimes();
 let table = document.createElement('table');
@@ -106,7 +110,6 @@ for(i=0; i<jr['groups'].length; i++){ //loop over each route (train Lines)
       console.log("(new Date()).getHours(): " + (new Date()).getHours() + " > d.getHours(): " + d.getHours());
       tr.innerHTML += (`<td style='font-size:60%;'>${((new Date()).getHours() == (d.getHours())) ? (d.getMinutes() - (new Date()).getMinutes()) : ( (60 - (new Date()).getMinutes()) + d.getMinutes() ) } min</td>`);
     }
-
 document.body.appendChild(stations);
 }
   stations.appendChild(table);
