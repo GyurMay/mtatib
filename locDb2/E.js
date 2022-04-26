@@ -30,4 +30,6 @@ locDb["14 St"] = [40.740938,-74.001919];
 locDb["W 4 St - Wash Sq"] = [40.732338,-74.000495];
 locDb["Spring St"] = [40.725595,-74.004326];
 locDb["Canal St"] = [40.721967,-74.005133];
+
 locDb["World Trade Center"] = [40.711835,-74.012188];
+locDb["WTC Cortlandt"] = [40.711835,-74.012188];
