@@ -15,7 +15,8 @@ function loadMainPage(line){
     for(k1=0;k1<lineJson.length;k1++) 
     { //< -> <=
       name = lineJson[k1].stopName;
-      if(locDb[lineJson[k1]["stopName"]] == undefined) continue;
+      console.log(`Inserting ${name}`);
+      if(/*locDb[lineJson[k1]["stopName"]]*/ name == undefined) continue;
       console.log(k1 + " : "+lineJson[k1]["stopName"] + " found");
       lat = locDb[lineJson[k1]["stopName"]][0];
       lon = locDb[lineJson[k1]["stopName"]][1];
