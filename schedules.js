@@ -12,7 +12,6 @@ locDb = [];
 function loadMainPage(line){
   let url = `https://collector-otp-prod.camsys-apps.com/schedule/MTASBWY/stopsForRoute?apikey=qeqy84JE7hUKfaI0Lxm2Ttcm6ZA0bYrP&&routeId=MTASBWY:${line}`;
   fetch(url).then((a) => { return a.json(); }).then((l) => { lineJson = l; }).then((e) => {
-    console.log("k is: "+k1);
     for(k1=0;k1<lineJson.length;k1++) 
     { //< -> <=
       name = lineJson[k1].stopName;
