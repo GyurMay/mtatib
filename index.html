@@ -10,14 +10,18 @@
       document.querySelector('#loadLocDb').src = "https://gyurmay.github.io/mtatib/locDb2/" + (new URLSearchParams(window.location.search).get('line')) + ".js";
       //document.querySelector('#loadLocDb').src = "https://gyurmay.github.io/mtatib/locDb2/allLocDb.js";
     </script>
-  <script src='https://gyurmay.github.io/mtatib/tibDB.js'/>
+<!--   <script src='https://gyurmay.github.io/mtatib/tibDB.js'/>
   <script src='https://gyurmay.github.io/mtatib/functions.js'/>
-  <script src='https://gyurmay.github.io/mtatib/schedules.js'/>
+  <script src='https://gyurmay.github.io/mtatib/schedules.js'/> -->
+  <script src='/mtatib/schedules.js'/>
+  <script src='/mtatib/tibDB.js'/>
+  <script src='/mtatib/functions.js'/>
+  
   <script>
   disabled_ids = [];
   </script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js'/>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js'/>
+<!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js'/>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js'/> -->
 <style>
 body{
     font-family: Sans-serif;
@@ -30,8 +34,6 @@ div > p {
     height: max-content;
     padding: 3% 0;
     box-shadow: 2px 3px 10px #000;
-    /* margin-left: -3.5em; */
-    /* width: 130%; */
     background: #516d85;
     margin-bottom: -0.9em;
     text-align: center;
@@ -194,24 +196,6 @@ li button {
 }
 </style>
 <script>
-//WTC -> HOBOKEN
-//https://old.panynj.gov/path/schedules-full-screen-mod.cfm?id=WTC_HOB_Weekday
-
-//setting up the UI
- // navigation = new Audio('mitlirrnavigator.mp3');
- // greetings = new Audio('mitlirrnavigator.mp3');
- // i=1;
- // function playnavigation(){
- // if(i==1){
- //     navigation = greetings;
- //     i++;
- // }
- // talking = ("talking 1s linear "+(parseInt(navigation.duration)).toString()).toString();
- // document.querySelector('img[onclick="playnavigation()"]').style.animation = talking;
- // navigation.play();
- // navigation.onended = function(){ document.querySelector('img[onclick="playnavigation()"]').style.animation = ''; };
- // }
- // 
   
 const options = document.getElementsByClassName("options");
 var currentStation;
@@ -233,14 +217,11 @@ function back(){
     currentStation.style.display = 'none';
     for(i=0;i<options.length;i++)
         options[i].style.display = 'block';
-    //document.querySelector('img[onclick="playnavigation()"]').style.display = '';
-    //document.querySelector('img[onclick="playnavigation()"]').style.animation = '';
   
     while(disabled_ids.length != 0){
         document.getElementById(disabled_ids.pop()).style.display = "block";
     }
 }
-//loadImmediatePath(); //uncomment
  
 </script>
  
@@ -252,8 +233,6 @@ function back(){
  <svg aria-hidden='true' class='icon icon-arrow-left' height='170' id='back' onclick='back()' style='margin:3px; display:none' viewBox='0 0 32 32' width='170'>
    <path d='M26.025 14.496l-14.286-.001 6.366-6.366L15.979 6 5.975 16.003 15.971 26l2.129-2.129-6.367-6.366h14.29z'/>
   </svg>
-<!-- 
- src="navigator.png" height="300" width="300" onclick="playnavigation()" /> -->
 
 <!-- Language Toggle button -->
 <div id='topBar' style='width:100%'>
@@ -281,7 +260,6 @@ function back(){
 
 <!-- searchBar -->
 <input id='searchField' placeholder='Search stations' style='font-size:100%; width:80%' type='text'/>
-<!-- <input id='trainLine' placeholder='7g' style='font-size:100%; width:20%;' type='text'/> -->
 <br/>
 <ul id='ul' style='direction;position: relative;display: block;padding: 0.5em; margin: 0; height:0.5em; top:-0.3em; margin-bottom:2em'>
   <script>
