@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <title>Check MTA Schedule in Tibetan</title>
+<b:skin><![CDATA[ ]]></b:skin> <!-- for blogger purpose -->
+  <script id='loadLocDb'/>
+    <script>
+      //6JCB.js on a separate file for 6JBC lines
+      document.querySelector('#loadLocDb').src = "https://gyurmay.github.io/mtatib/locDb2/" + (new URLSearchParams(window.location.search).get('line')) + ".js";
+      //document.querySelector('#loadLocDb').src = "https://gyurmay.github.io/mtatib/locDb2/allLocDb.js";
+    </script>
+  <script src='https://gyurmay.github.io/mtatib/tibDB.js'/>
+  <script src='https://gyurmay.github.io/mtatib/functions.js'/>
+  <script src='https://gyurmay.github.io/mtatib/schedules.js'/>
+  <script>
+  disabled_ids = [];
+  </script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/core.js'/>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js'/>
+<style>
+body{
+    font-family: Sans-serif;
+    font-size: 500%;
+}
+div > p {
+    color: white;
+    border: 4px #27747c solid;
+    width: 90%;
+    height: max-content;
+    padding: 3% 0;
+    box-shadow: 2px 3px 10px #000;
+    /* margin-left: -3.5em; */
+    /* width: 130%; */
+    background: #516d85;
+    margin-bottom: -0.9em;
+    text-align: center;
+    margin-left: 5%;
+}
+p {
+    color: black;
+    /* background: #ccc; */
+    /* border: 4px #53bcb3 solid; */
+    /* width: 100%; */
+    height: max-content;
+    /* padding: 3%; */
+}
+p > img {
+    position: relative;
+    top: 40px;
+}
+audio{
+    display: none;
+}
+div.options > img{
+    margin-top:1.5em;
+}
+imimg[onclick="playnavigation()"]:hover{
+    animation: talking 1s linear infinite;
+}
+@keyframes talking{
+    0%{
+      transform: scale(1) rotate(0deg);
+    }25%{
+      transform: scale(1.2) rotate(15deg);
+    }50%{
+      transform: scale(1) rotate(0);
+    }75%{
+      transform: scale(1.2) rotate(-15deg);
+    }100%{
+      transform: scale(1) rotate(0);
+    }
+}
+#langToggle{
+    height: 1em;
+    width: 2em;
+    border: 1px gray solid;
+    display: block;
+    background: #d7ea7a;
+}
+input {
+  border-radius: 20px;
+  border: 0;
+  margin-left: 4%;
+}
+table{
+  position:relative;
+  left:0%;
+  border:4px solid #000;
+  width:100%;
+  background:white;
+  font-size:70%;
+}
+td img {
+    height: 100px;
+    widht: 100px;
+    border: 3px #8d8888 solid;
+    padding: 0.1em;
+    border-radius: 50%;
+}
+  #trainSelect {
+    font-size: 100%;
+    border: 5px solid #000;
+    width: 15%;
+    text-align: center;
+}
+#ul li {
+    float: left;
+    position: relative;
+    display: block;
+    padding-right: 0.3em;
+}
+.currLine {
+    border: 3px solid green;
+    border-radius: 50%;
+    padding: 1px;
+    margin-top: -8px;
+}
+.linesOptional{
+  direction;position: relative;display: block;padding: 0.6em 1.6em 1.6em 1.6em; margin: 0; height:1.5em;
+  }
+#go{ left:38% !important; }
+#times > td:first-child::before {
+    content: "|";
+    font-size: 48%;
+    position: relative;
+    left: 40%;
+    top: 0.6em;
+}
+#load_icon {
+    width: max-content;
+    position: fixed;
+    background: #ddd;
+    left: 45%;
+    top: 40%;
+    padding: 1em;
+    font-size: 50%;
+  animation: loading 2s linear infinite;
+  box-shadow: 0 0 0 25em rgba(0,0,0,0.5);
+  z-index: 2;
+}
+@keyframes loading{
+  0%{
+  width: 5em;
+  }25%{
+  width: 1em;
+  }50%{
+  width: 3em;
+  }to{
+  width:5em;
+  }
+}
+h3{
+width: max-content;  
+}
+  
+#menu li {
+  display: block;
+  position: relative;
+  left: -0.06em;
+  list-style-type: none;
+  border: 3px solid black;
+  width: 100%;
+  padding: 0.3em 0;
+  background-color: #1b5651;
+  color: whitesmoke;
+  border-radius: 4px;
+}
+#menu {
+  display: inline-block;
+  width: 100%;
+}
+#menuUl {
+  display: block;
+  margin-top: 0;
+  text-align: center;
+  padding-left: 0;
+}
+#menu li:hover, #menu li:focus{
+  background-color: white;
+  color:black;
+}
+#menuButton{
+  transform: scale(1.2);
+  border: none;
+}
+li button {
+  display: block;
+  border: none;
+  width: 100%;
+  background-color: inherit;
+  color: inherit;
+  font-size: 100%;
+}
+</style>
+<script>
+//WTC -> HOBOKEN
+//https://old.panynj.gov/path/schedules-full-screen-mod.cfm?id=WTC_HOB_Weekday
+
+//setting up the UI
+ // navigation = new Audio('mitlirrnavigator.mp3');
+ // greetings = new Audio('mitlirrnavigator.mp3');
+ // i=1;
+ // function playnavigation(){
+ // if(i==1){
+ //     navigation = greetings;
+ //     i++;
+ // }
+ // talking = ("talking 1s linear "+(parseInt(navigation.duration)).toString()).toString();
+ // document.querySelector('img[onclick="playnavigation()"]').style.animation = talking;
+ // navigation.play();
+ // navigation.onended = function(){ document.querySelector('img[onclick="playnavigation()"]').style.animation = ''; };
+ // }
+ // 
+  
+const options = document.getElementsByClassName("options");
+var currentStation;
+function schedulevisible(start){
+    id = start;
+  console.log("times is w/ id:" + id);
+    times = document.getElementById(id);
+    currentStation = times;
+    times.style.display = 'block';
+    for(i=0;i<options.length;i++)
+        options[i].style.display = 'none';
+    document.getElementById("back").style.display = 'block';
+    //document.querySelector('img[onclick="playnavigation()"]').style.display = 'none';
+    navigation.pause();
+    navigation.currentTime = 0;
+}
+function back(){
+    document.getElementById("back").style.display = 'none';
+    currentStation.style.display = 'none';
+    for(i=0;i<options.length;i++)
+        options[i].style.display = 'block';
+    //document.querySelector('img[onclick="playnavigation()"]').style.display = '';
+    //document.querySelector('img[onclick="playnavigation()"]').style.animation = '';
+  
+    while(disabled_ids.length != 0){
+        document.getElementById(disabled_ids.pop()).style.display = "block";
+    }
+}
+//loadImmediatePath(); //uncomment
+ 
+</script>
+ 
+</head>
+<body>
+  <div id='load_icon' style='display:none'><img height='1em' src='https://commons.wikimedia.org/wiki/File:DharmaWheelGIF.gif' width='1em'/></div>
+  <b:section id='NaN'/>
+<!-- <img height='170' id='back' onclick='back()' src='https://image.flaticon.com/icons/png/512/93/93634.png' style='margin:3px; display:none' width='170'/> -->
+ <svg aria-hidden='true' class='icon icon-arrow-left' height='170' id='back' onclick='back()' style='margin:3px; display:none' viewBox='0 0 32 32' width='170'>
+   <path d='M26.025 14.496l-14.286-.001 6.366-6.366L15.979 6 5.975 16.003 15.971 26l2.129-2.129-6.367-6.366h14.29z'/>
+  </svg>
+<!-- 
+ src="navigator.png" height="300" width="300" onclick="playnavigation()" /> -->
+
+<!-- Language Toggle button -->
+<div id='topBar' style='width:100%'>
+
+<span id='langSelection' style='display:flex; margin:0.1em 0 0.5em 0.2em; width:80%; float:left;'>
+བ&#3964;ད&#3851;ཡ&#3954;ག&#8203;
+<button id='langToggle' style='height: 8em;width: 20%;border: 1px gray solid;display: block;background: #bcd7bb;border-radius: 10em;'>
+<img id='toggleIcon' src='https://www.pngkey.com/png/full/194-1942123_png-small-red-circle.png' style='height: 6em; margin-left: -50%; transition: all 0.1s linear;'/>
+</button>
+  eng
+</span>
+  
+<button id='menuButton' onclick='showMenu()' style='margin:0; float:right; width:20%; font-size:60%; padding:0.1em 0.3em 0 0; background:none; width:15%'><svg height='40' viewBox='0 0 100 80' width='40'>
+  <rect height='20' width='100'/>
+  <rect height='20' width='100' y='30'/>
+  <rect height='20' width='100' y='60'/>
+</svg></button>
+</div>
+<!-- end of toggle button -->
+<div id='menu' style='display:none'>
+  <ul id='menuUl'>
+    <li id='setHome'><button onclick='setHome()'>Set Home</button></li>
+  </ul>
+</div>
+
+<!-- searchBar -->
+<input id='searchField' placeholder='Search stations' style='font-size:100%; width:80%' type='text'/>
+<!-- <input id='trainLine' placeholder='7g' style='font-size:100%; width:20%;' type='text'/> -->
+<br/>
+<ul id='ul' style='direction;position: relative;display: block;padding: 0.5em; margin: 0; height:0.5em; top:-0.3em; margin-bottom:2em'>
+  <script>
+    lines = ['R','M','Q','W','1','2','3','F','7','E','N','A','B','C','J','6'];
+    urlParams = new URLSearchParams(lang);
+    for(i=0;i<lines.length;i++){
+    if(urlParams.get('lang') == null)
+        tempLang = '';
+    else
+        tempLang = '&lang=' + urlParams.get('lang');
+    document.querySelector('#ul').innerHTML += `<li id='${lines[i]}'><a href='?line=${lines[i]}${tempLang}'><img src='https://new.mta.info/themes/custom/bootstrap_mta/images/icons/${lines[i]}.svg' style='height:1em; padding:1px 0 2px 3px;'/></a></li>`;
+    }
+    
+  </script>
+</ul>
+<script>
+searchField.onkeydown = () => {
+    filter();
+};
+trainLine.onkeydown = (e) => {
+    if(e.key[e.key.length - 1] == 'g')
+        loadSchedulePage(trainLine.value[0], 0);
+};
+</script>
+<!-- end of searchBar -->
+
+<script>
+status = parseInt(toggleIcon.style.marginLeft.substr(0, toggleIcon.style.marginLeft.length - 1));
+function toggle(){
+    status = -(status);
+    toggleIcon.style.marginLeft = status.toString() + toggleIcon.style.marginLeft[toggleIcon.style.marginLeft.length - 1];
+    langToggle.style.backgroundColor = (status > 0) ? '#175ce057' : '#bcd7bb';
+}
+if(has(document.location.search, "lang=eng")){
+    console.log(document.location.search);
+    toggle();
+}
+langToggle.onclick = () => { 
+    toggle();
+    if(!has(lang, "lang=eng")){
+        lang = "lang=eng";
+        document.location.href += (document.location.search.split('&')[0].length > 1) ? '&'+lang : '?' + lang;
+    }else{
+    document.location = document.location.href.split('lang=eng')[0];
+    }
+  console.log(lang+" si lang");
+};
+document.body.style.backgroundColor = `rgba(${Math.random() * 255}, ${Math.random() * 255},${Math.random() * 255},${Math.random() * 0.82}`;
+
+for(i=0;i<lines.length;i++){
+tempL = "line="+lines[i];
+if(has(document.location.search, tempL)){
+  document.getElementById(lines[i]).firstChild.firstChild.className = 'currLine';
+}
+}
+if(urlParams.get('line') == null) document.location = document.location.href.split(".com")[0]+ '.com' + '?line=R';
+var getLine = urlParams.get('line');
+var lineJson = ''; //remove if dont work
+loadMainPage(getLine);
+</script>
+  <div class='options'/>
+  <script>
+    options[0].onclick  = (e) => {
+    selectedStation = e.target;
+    if(loadSchedulePage(mStation[(e.target.id)], e.target.id) == true);
+    }
+    setTimeout(() => homeStaPrepend(), 2000);
+  </script>
+<!--- EOD -->
+</body>
+</html>
