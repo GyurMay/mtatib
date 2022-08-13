@@ -5,4 +5,4 @@ we place out components with/without passing props as attributes in html tags. T
 
 In MTATIB Vanilla JS:
 1. We have a index page with elements: Searchbar, setHome button, train station divs and onclick event schedule div. Each of this needs to be converted to a component
-2. Functions.js and schedule.js will be implemented inside 
+2. Functions.js and schedule.js will be implemented inside of components
