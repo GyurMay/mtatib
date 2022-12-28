@@ -427,14 +427,14 @@
     ]
   },
   {
-    "name": "47 - 50 Sts - Rockefeller Ctr",
+    "name": "47-50 Sts - Rockefeller Center",
     "loc": [
       40.758623,
       -73.981566
     ]
   },
   {
-    "name": "42 St - Bryant Pk",
+    "name": "42 St - Bryant Park",
     "loc": [
       40.754222,
       -73.984569
@@ -462,7 +462,7 @@
     ]
   },
   {
-    "name": "W 4 St - Wash Sq",
+    "name": "West 4 St - Washington Sq",
     "loc": [
       40.732338,
       -74.000495
@@ -476,7 +476,7 @@
     ]
   },
   {
-    "name": "Delancey St - Essex St",
+    "name": "Essex St",
     "loc": [
       40.718551,
       -73.98765
@@ -672,7 +672,7 @@
     ]
   },
   {
-    "name": "Atlantic Av - Barclays Ctr",
+    "name": "Atlantic Av - Barclays Center",
     "loc": [
       40.683407,
       -73.976507
@@ -791,7 +791,7 @@
     ]
   },
   {
-    "name": "W 8 St - NY Aquarium",
+    "name": "West 8 St - NY Aquarium",
     "loc": [
       40.575499,
       -73.976873
@@ -841,7 +841,7 @@
     ]
   },
   {
-    "name": "39 Av - Dutch Kills",
+    "name": "39 Av",
     "loc": [
       40.752882,
       -73.932756
@@ -968,7 +968,7 @@
     "manually": true
   },
   {
-    "name": "Van Cortlandt Park-242 St",
+    "name": "Van Cortlandt Park - 242 St",
     "loc": [
       40.889246,
       -73.898584
@@ -1031,7 +1031,7 @@
     ]
   },
   {
-    "name": "168 St - Washington Hts",
+    "name": "168 St",
     "loc": [
       40.841024,
       -73.940083
@@ -1227,7 +1227,7 @@
     ]
   },
   {
-    "name": "South Ferru",
+    "name": "South Ferry",
     "loc": [
       100,
       100
@@ -1578,7 +1578,7 @@
     ]
   },
   {
-    "name": "Atlantic Av - Barclays Ctr",
+    "name": "Atlantic Av - Barclays Center",
     "loc": [
       40.684359,
       -73.977668
@@ -1648,7 +1648,7 @@
     ]
   },
   {
-    "name": "Newkirk Av",
+    "name": "Newkirk Av - Little Haiti",
     "loc": [
       40.639924,
       -73.948161
@@ -1748,14 +1748,14 @@
     ]
   },
   {
-    "name": "47 - 50 Sts - Rockefeller Ctr",
+    "name": "47-50 Sts - Rockefeller Center",
     "loc": [
       40.758623,
       -73.981566
     ]
   },
   {
-    "name": "42 St - Bryant Pk",
+    "name": "42 St - Bryant Park",
     "loc": [
       40.754222,
       -73.984569
@@ -1783,7 +1783,7 @@
     ]
   },
   {
-    "name": "W 4 St - Wash Sq",
+    "name": "West 4 St - Washington Sq",
     "loc": [
       40.732338,
       -74.000495
@@ -1804,7 +1804,7 @@
     ]
   },
   {
-    "name": "Delancey St - Essex St",
+    "name": "Delancey St",
     "loc": [
       40.718609,
       -73.988116
@@ -1958,14 +1958,14 @@
     ]
   },
   {
-    "name": "W 8 St - NY Aquarium",
+    "name": "West 8 St - NY Aquarium",
     "loc": [
       40.575499,
       -73.976873
     ]
   },
   {
-    "name":"Coney Island",
+    "name":"Coney Island - Stillwell Av",
     "loc": [
         100,
         100
@@ -2120,7 +2120,7 @@
     ]
   },
   {
-    "name":"34 St - Hudson yards",
+    "name":"34 St - Hudson Yards",
     "loc": [
         100,
         100
@@ -2135,7 +2135,7 @@
     ]
   },
   {
-    "name": "Sutphin Blvd - Archer Av-JFK Airport",
+    "name": "Sutphin Blvd - Archer Av - JFK Airport",
     "loc": [
       40.700485,
       -73.807971
@@ -2324,7 +2324,7 @@
     ]
   },
   {
-    "name": "W 4 St - Wash Sq",
+    "name": "West 4 St - Washington Sq",
     "loc": [
       40.732338,
       -74.000495
@@ -2387,7 +2387,7 @@
     ]
   },
   {
-    "name": "39 Av - Dutch Kills",
+    "name": "39 Av",
     "loc": [
       40.752882,
       -73.932756
@@ -2506,7 +2506,7 @@
     ]
   },
   {
-    "name": "Whitehall St - South Ferry",
+    "name": "Whitehall St",
     "loc": [
       40.701938,
       -74.012588
@@ -2534,7 +2534,7 @@
     ]
   },
   {
-    "name": "Atlantic Av - Barclays Ctr",
+    "name": "Atlantic Av - Barclays Center",
     "loc": [
       40.683907,
       -73.97887
@@ -2941,7 +2941,7 @@
     ]
   },
   {
-    "name": "Sutphin Blvd - Archer Av-JFK Airport",
+    "name": "Sutphin Blvd - Archer Av - JFK Airport",
     "loc": [
       40.700485,
       -73.807971
@@ -2983,7 +2983,7 @@
     ]
   },
   {
-    "name": "75 St - Elderts Ln",
+    "name": "75 St - Elderts Lane",
     "loc": [
       40.691322,
       -73.867141
@@ -3102,7 +3102,7 @@
     ]
   },
   {
-    "name": "Delancey St - Essex St",
+    "name": "Essex St",
     "loc": [
       40.718551,
       -73.98765
@@ -3163,7 +3163,7 @@
     ]
   },
   {
-    "name": "Westchester Sq - E Tremont Av",
+    "name": "Westchester Sq - East Tremont Av",
     "loc": [
       40.840128,
       -73.842875
@@ -3533,7 +3533,7 @@
     ]
   },
   {
-    "name": "W 4 St - Wash Sq",
+    "name": "West 4 St - Washington Sq",
     "loc": [
       40.732338,
       -74.000495
@@ -3581,7 +3581,7 @@
     ]
   },
   {
-    "name": "Hoyt - Schermerhorn Sts",
+    "name": "Hoyt - Schermerhorn",
     "loc": [
       40.688484,
       -73.985001
@@ -3735,14 +3735,14 @@
     ]
   },
   {
-    "name": "47 - 50 Sts - Rockefeller Ctr",
+    "name": "47-50 Sts - Rockefeller Center",
     "loc": [
       40.758623,
       -73.981566
     ]
   },
   {
-    "name": "42 St - Bryant Pk",
+    "name": "42 St - Bryant Park",
     "loc": [
       40.754222,
       -73.984569
@@ -3777,7 +3777,7 @@
     ]
   },
   {
-    "name": "Atlantic Av - Barclays Ctr",
+    "name": "Atlantic Av - Barclays Center",
     "loc": [
       40.683407,
       -73.976507
