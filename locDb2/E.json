@@ -1,6 +1,6 @@
 {
 	"Jamaica Center - Parsons/Archer": [40.702147,-73.801109],
-	"Sutphin Blvd - Archer Av-JFK Airport": [40.700485,-73.807971],
+	"Sutphin Blvd - Archer Av - JFK Airport": [40.700485,-73.807971],
 	"Jamaica - Van Wyck": [40.702565,-73.816861],
 	"Briarwood": [40.709179,-73.820574],
 	"Kew Gardens - Union Tpke": [40.714441,-73.831008],
@@ -27,10 +27,8 @@
 	"34 St - Penn Station": [40.752427,-73.993679],
 	"23 St": [40.745905,-73.998043],
 	"14 St": [40.740938,-74.001919],
-	"W 4 St - Wash Sq": [40.732338,-74.000495],
+	"West 4 St - Washington Sq": [40.732338,-74.000495],
 	"Spring St": [40.725595,-74.004326],
 	"Canal St": [40.721967,-74.005133],
-
-	"World Trade Center": [40.711835,-74.012188],
-	"WTC Cortlandt": [40.711835,-74.012188]
+	"World Trade Center": [40.711835,-74.012188]
 }
